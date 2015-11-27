@@ -1,5 +1,17 @@
 <form method="get" action="/quizes/answer">
-    Pregunta: <%= pregunta %><p>
-    <input type="text" name="respuesta" placeholder="Respuesta" />
-    <input type="submit" value="Enviar" />
- </form>
+
+  Pregunta: <%- pregunta %><p>
+
+  <% if(area instanceof Array){ %>
+    <% for(var i=0; i<area.length; i++){ %>
+      <%- area[i] %>
+    <% } %>
+  <% } else { %>
+    <%- area %>
+  <% } %>
+
+  <br><br>
+
+  <input type="submit" value="Enviar" />
+
+</form>
