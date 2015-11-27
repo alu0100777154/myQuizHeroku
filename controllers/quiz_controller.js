@@ -15,6 +15,22 @@ exports.question = function (req, res) {
     res.render('quizes/question', {pregunta: current_new, area: area});
 };
 
+exports.onequestion = function (req, res) {
+    var id = req.params.id;
+    var n = quiz.numQ();
+
+    if (id < 1 || id > n)
+        res.render('quizes/onequestion', {prg: "No existe esa pregunta."});
+
+    else {
+        current = quiz.q[id - 1];
+        current_new = quiz.getQuestion(current);
+        area = quiz.getArea(current);
+
+        res.render('quizes/question', {pregunta: current_new, area: area});
+    }
+};
+
 exports.answer = function (req, res) {
     var c = 'Incorrecto';
     if (current.respuesta(req.query.respuesta)) {
@@ -34,18 +50,3 @@ exports.questions = function (req, res) {
 };
 
 
-exports.question = function (req, res) {
-    var id = req.params.id;
-    var n = quiz.numQ();
-
-    if (id < 1 || id > n)
-        res.render('quizes/question', {prg: "No existe esa pregunta."});
-
-    else {
-        current = quiz.q[id - 1];
-        current_new = quiz.getQuestion(current);
-        area = quiz.getArea(current);
-
-        res.render('quizes/question', {pregunta: current_new, area: area});
-    }
-};
