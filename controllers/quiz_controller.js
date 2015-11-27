@@ -23,23 +23,23 @@ exports.answer = function (req, res) {
     res.render('quizes/answer', {respuesta: c});
 };
 
-exports.preguntas = function (req, res) {
+exports.questions = function (req, res) {
     var n = quiz.numQ();
     var array = new Array(n);
 
     for (var i = 0; i < n; i++)
         array[i] = quiz.getQ(i);
 
-    res.render('quizes/preguntas', {lista: array});
+    res.render('quizes/questions', {lista: array});
 };
 
 
-exports.pregunta = function (req, res) {
+exports.question = function (req, res) {
     var id = req.params.id;
     var n = quiz.numQ();
 
     if (id < 1 || id > n)
-        res.render('quizes/pregunta', {prg: "No existe esa pregunta."});
+        res.render('quizes/question', {prg: "No existe esa pregunta."});
 
     else {
         current = quiz.q[id - 1];
