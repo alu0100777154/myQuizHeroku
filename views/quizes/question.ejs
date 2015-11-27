@@ -1,17 +1,10 @@
 <form method="get" action="/quizes/answer">
 
-  Pregunta: <%- pregunta %><p>
+    Pregunta: <%- pregunta.get_pregunta() %><p>
+        <%- pregunta.get_tam() %>
 
-  <% if(area instanceof Array){ %>
-    <% for(var i=0; i<area.length; i++){ %>
-      <%- area[i] %>
-    <% } %>
-  <% } else { %>
-    <%- area %>
-  <% } %>
 
-  <br><br>
-
-  <input type="submit" value="Enviar" />
+        <br><br>
+        <input type="submit" value="Enviar" />
 
 </form>

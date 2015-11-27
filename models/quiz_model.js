@@ -71,12 +71,4 @@ Quiz.prototype.getQ = function (x) {
 }
 ;
 
-Quiz.prototype.getQuestion = function(x){
-  return x['pregunta'].get_pregunta();
-};
-
-Quiz.prototype.getArea = function (x) {
-    return x['pregunta'].caja();
-};
-
 module.exports = Quiz;

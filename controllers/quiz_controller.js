@@ -9,10 +9,8 @@ exports.index = function (req, res, next) {
 
 exports.question = function (req, res) {
     current = quiz.randomQuestion();
-    current_new = quiz.getQuestion(current);
-    area = quiz.getArea(current);
 
-    res.render('quizes/question', {pregunta: current_new, area: area});
+    res.render('quizes/question', {pregunta: current.pregunta});
 };
 
 exports.onequestion = function (req, res) {
@@ -24,10 +22,8 @@ exports.onequestion = function (req, res) {
 
     else {
         current = quiz.q[id - 1];
-        current_new = quiz.getQuestion(current);
-        area = quiz.getArea(current);
 
-        res.render('quizes/question', {pregunta: current_new, area: area});
+        res.render('quizes/question', {pregunta: current.pregunta});
     }
 };
 
