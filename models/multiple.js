@@ -11,7 +11,7 @@ Multiple.prototype = new Pregunta();
 
 Multiple.prototype.constructor = Multiple;
 
-Multiple.prototype.vista = function () {
+Multiple.prototype.get_tam = function () {
     var vista = [];
 
     for (var i = 0; i < this.opciones.length; i++) {

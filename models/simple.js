@@ -11,7 +11,7 @@ Simple.prototype = new Pregunta();
 
 Simple.prototype.constructor = Simple;
 
-Simple.prototype.tam = function () {
+Simple.prototype.get_tam = function () {
     var vista = [];
     
     for (var i = 0; i < this.opciones.length; i++) {

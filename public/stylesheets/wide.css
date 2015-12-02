@@ -1,10 +1,27 @@
-body { background: #999; }
+body { background: #ADD8E6; }
 
-#page-wrap:after { content: "Wide Layout"; }
+//#page-wrap:after { content: "Wide Layout"; }
+
+a:link {
+color: #FF0000;
+text-decoration: none;
+}
+a:visited {
+text-decoration: none;
+color: #FF0000;
+}
+a:hover {
+text-decoration: none;
+color: #FF0000;
+}
+a:active {
+text-decoration: none;
+color: #FF0000;
+}
 
 #n1      { float: left; width: 15%; height: 200px; }
 nav span { margin: 0px 100px 0px 0px; }
-section { float: right: width: 80%; height: 200px; }
+section { float: right; width: 80%; height: 200px; }
 footer { clear: both; display: block; }
 #photocas {
   display: inline;

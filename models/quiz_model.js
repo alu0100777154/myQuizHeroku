@@ -1,15 +1,24 @@
 var AbstractQuiz = require('../models/abstract_quiz_model.js');
 var Corta = require('../models/corta.js');
 var Larga = require('../models/larga.js');
+var Simple = require('../models/simple.js');
+var Multiple = require('../models/multiple.js');
 var Respuesta = require('../models/respuesta.js');
+
 
 function Quiz() {
     AbstractQuiz.call(this);
-    
+
     this.q.push(
-            {pregunta: new Corta('¿Capital de Italia?'),
-                respuesta: new Respuesta(/^\s*roma\s*$/i)
+            {pregunta: new Simple('¿En qué equipo no ha jugado Pau Gasol?', ['Bulls', 'Lakers', 'Miami']),
+                respuesta: new Respuesta('Miami')
             },
+    {pregunta: new Multiple('¿En qué equipos  ha jugado Pau Gasol?', ['Bulls', 'Lakers', 'Miami', 'Memphis']),
+        respuesta: new Respuesta(['Bulls', 'Lakers', 'Memphis'])
+    },
+    {pregunta: new Corta('¿Capital de Italia?'),
+        respuesta: new Respuesta(/^\s*roma\s*$/i)
+    },
     {pregunta: new Corta('¿En que año se descubrió América?'),
         respuesta: new Respuesta('1492')
     },
