@@ -4,7 +4,7 @@ function Larga(pregunta) {
     Pregunta.call(this);
 
     this.pregunta = pregunta;
-    this.tam = "<textarea name='respuesta' placeholder='Aqui su respuesta' rows='4' cols='50'></textarea>";
+    this.area = "<textarea name='respuesta' placeholder='Aqui su respuesta' rows='4' cols='50'></textarea>";
 }
 
 Larga.prototype = new Pregunta();
@@ -16,8 +16,8 @@ Larga.prototype.get_pregunta = function () {
     return this.pregunta;
 };
 
-Larga.prototype.get_tam = function () {
-    return this.tam;
+Larga.prototype.get_area = function () {
+    return this.area;
 };
 
 module.exports = Larga;

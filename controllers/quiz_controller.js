@@ -44,5 +44,3 @@ exports.questions = function (req, res) {
 
     res.render('quizes/questions', {lista: array});
 };
-
-
