@@ -1,4 +1,4 @@
-# Práctica 7 Quiz
+# Práctica 8 Quiz Heroku
 # Sistemas y Tecnologías Web de la ULL
 ## Guillermo Vicente Sánchez Guindulain
 
@@ -9,12 +9,12 @@
 
 **Url del repositorio:** 
 
-[Repositorio](https://github.com/alu0100777154/myQuiz)
+[Repositorio](https://github.com/alu0100777154/myQuizHeroku)
 
 **Página personal**
 
 [Personal](http://alu0100777154.github.io)
 
-**Despliegue IAAS**
+**Despliegue Heroku**
 
-[IAAS](http://10.6.128.80:3000/)
+[Heroku](http://myquizsytw.herokuapp.com/)
