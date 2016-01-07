@@ -1,6 +1,23 @@
-body { background: #333; }
+body { background: #ADD8E6; }
 
-#page-wrap:after { content: "Smartphone Layout"; }
+a:link {
+color: #FF0000;
+text-decoration: none;
+}
+a:visited {
+text-decoration: none;
+color: #FF0000;
+}
+a:hover {
+text-decoration: none;
+color: #FF0000;
+}
+a:active {
+text-decoration: none;
+color: #FF0000;
+}
+
+//#page-wrap:after { content: "Smartphone Layout"; }
 
 h2 span, section h3 { display: none; }
 body { font-size: xx-large; }

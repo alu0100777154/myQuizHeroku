@@ -1,5 +1,10 @@
 <form method="get" action="/quizes/answer">
-    Pregunta: <%= pregunta %><p>
-    <input type="text" name="respuesta" placeholder="Respuesta" />
-    <input type="submit" value="Enviar" />
- </form>
+
+    Pregunta: <%- pregunta.get_pregunta() %><p>
+        <%- pregunta.get_area() %>
+
+
+        <br><br>
+        <input type="submit" value="Enviar" />
+
+</form>
