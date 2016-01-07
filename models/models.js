@@ -2,7 +2,7 @@ var path = require('path');
 // Postgres DATABASE_URL = postgres://user:passwd@host:port/database
 // SQLite   DATABASE_URL = sqlite://:@:/
 
-var databaseURL = process.env.DATABASE_URL          || 'postgres://user:passwd@host:port/database';
+var databaseURL = process.env.DATABASE_URL || 'postgres://user:passwd@host:port/database';
 
 
 //var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
@@ -24,13 +24,13 @@ var Sequelize = require('sequelize');
 
 // Usar BBDD SQLite o Postgres
 var sequelize = new Sequelize(DB_name, user, pwd,
-  { dialect:  protocol,
-    protocol: protocol,
-    port:     port,
-    host:     host,
-    storage:  storage,  // solo SQLite (.env)
-    omitNull: true      // solo Postgres
-  }
+        {dialect: protocol,
+            protocol: protocol,
+            port: port,
+            host: host,
+            storage: storage, // solo SQLite (.env)
+            omitNull: true      // solo Postgres
+        }
 );
 
 //Importar la definición de la tabla Quiz en quiz_model.js
@@ -46,6 +46,10 @@ sequelize.sync().then(function () {
             Quiz.create({
                 pregunta: 'Capital de Italia',
                 respuesta: 'Roma'
+            });
+            Quiz.create({
+                pregunta: 'Capital de Portugal',
+                respuesta: 'Lisboa'
             })
                     .then(function () {
                         console.log('DB incializada');
