@@ -35,11 +35,29 @@ var sequelize = new Sequelize(DB_name, user, pwd,
         }
 );
 
-//Importar la definición de la tabla Quiz en quiz_model.js
-var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
+// Importar definicion de la tabla Quiz
+var quiz_path = path.join(__dirname,'quiz');
+var Quiz = sequelize.import(quiz_path);
 
-exports.Quiz = Quiz; //exportar definicion de tabla Quiz
+// Importar definicion de la tabla Comment
+var comment_path = path.join(__dirname,'comment');
+var Comment = sequelize.import(comment_path);
 
+// Importar definicion de la tabla User
+var user_path = path.join(__dirname,'user');
+var User = sequelize.import(user_path);
+
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
+
+// los quizes pertenecen a un usuario registrado
+Quiz.belongsTo(User);
+User.hasMany(Quiz);
+
+// exportar tablas
+exports.Quiz = Quiz;
+exports.Comment = Comment;
+exports.User = User;
 
 //Crea e inicializa la tabla de preguntas en la DB
 sequelize.sync().then(function () {
@@ -58,4 +76,11 @@ sequelize.sync().then(function () {
                     });
         }
     });
+    User.count().then(function (count) {
+		if(count === 0) {
+			User.create({username: 'admin',password: '1234', isAdmin: true});
+                        User.create({username: 'pepe',password: '5678'})
+			.then(function(){console.log('Base de datos (usuarios) inicializada');});
+		}
+	});
 });
