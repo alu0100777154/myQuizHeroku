@@ -24,6 +24,17 @@ exports.new = function (req, res) {
     res.render('quizes/new', {quiz: quiz});
 };
 
+// POST /quizes/create
+
+ exports.create = function(req, res) {
+   var quiz = models.Quiz.build( req.body.quiz );
+   // save: guarda en DB campos pregunta y respuesta de quiz
+   quiz.save({fields: ["pregunta", "respuesta"]})
+         .then( function(){ res.redirect('/quizes');
+       });      // res.redirect: Redirección HTTP a lista de preguntas
+ };
+ 
+ // GET /quizes
 
 exports.index = function (req, res) {
     models.Quiz.findAll().then(function (quizes) {
@@ -31,7 +42,7 @@ exports.index = function (req, res) {
     });
 };
 
-//GET /quizes/question
+// GET /quizes/question
 exports.show = function (req, res) {
     models.Quiz.findById(req.params.quizId).then(function (quiz) {
         res.render('quizes/show', {quiz: req.quiz});
