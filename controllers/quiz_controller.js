@@ -1,20 +1,33 @@
 var models = require('../models/models.js');
 
-exports.load = function(req, res, next, quizId) {
-  models.Quiz.findById(quizId).then(
-          function(quiz) {
-        if (quiz) {
-          req.quiz = quiz;
-          next();
-        } else { next(new Error('No existe quizId = '+quizId)); }
-      }
-      ).catch( function(error) { next(error); });
+exports.load = function (req, res, next, quizId) {
+    models.Quiz.findById(quizId).then(
+            function (quiz) {
+                if (quiz) {
+                    req.quiz = quiz;
+                    next();
+                } else {
+                    next(new Error('No existe quizId = ' + quizId));
+                }
+            }
+    ).catch(function (error) {
+        next(error);
+    });
+};
+
+//GET /quizes/new
+
+exports.new = function (req, res) {
+    var quiz = models.Quiz.build(// crea objeto quiz
+            {pregunta: 'Pregunta', respuesta: 'Respuesta'}
+    );
+    res.render('quizes/new', {quiz: quiz});
 };
 
 
-exports.index = function(req, res) {  
-  models.Quiz.findAll().then(function(quizes) {
-      res.render('quizes/index', {quizes: quizes});
+exports.index = function (req, res) {
+    models.Quiz.findAll().then(function (quizes) {
+        res.render('quizes/index', {quizes: quizes});
     });
 };
 
