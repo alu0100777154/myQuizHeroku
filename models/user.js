@@ -11,4 +11,5 @@ module.exports = function(sequelize, DataTypes) {
       validate: { notEmpty: {msg: "-> Falta password."}}
     }
   });
+    return User;
 };
