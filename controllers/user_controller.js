@@ -1,20 +1,5 @@
 var models = require('../models/models.js');
 
-exports.load = function(req, res, next, userId) {
-  models.User.find({
-            where: {
-                id: Number(userId)
-            }
-        }).then(function(user) {
-      if (user) {
-        req.user = user;
-        next();
-      } else{next(new Error('No existe userId=' + userId))}
-    }
-  ).catch(function(error){next(error)});
-};
-
-
 exports.autenticar = function(login, password, callback) {
 	models.User.find({
         where: {
@@ -30,6 +15,23 @@ exports.autenticar = function(login, password, callback) {
       else { callback(new Error('No existe el usuario: ' + login))}
     }).catch(function(error){callback(error)});
 };
+
+exports.load = function(req, res, next, userId) {
+  models.User.find({
+            where: {
+                id: Number(userId)
+            }
+        }).then(function(user) {
+      if (user) {
+        req.user = user;
+        next();
+      } else{next(new Error('No existe userId=' + userId))}
+    }
+  ).catch(function(error){next(error)});
+};
+
+
+
 
 
 
