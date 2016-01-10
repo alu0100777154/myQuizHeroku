@@ -59,30 +59,22 @@ exports.Quiz = Quiz;
 exports.Comment = Comment;
 exports.User = User;
 
-//Crea e inicializa la tabla de preguntas en la DB
-sequelize.sync().then(function () {
-    Quiz.count().then(function (count) {
-        if (count === 0) { //solo si esta vacia se inicializa 
-            Quiz.create({
-                pregunta: 'Capital de Italia',
-                respuesta: 'Roma'
-            });
-            Quiz.create({
-                pregunta: 'Capital de Portugal',
-                respuesta: 'Lisboa'
-            })
-                    .then(function () {
-                        console.log('DB incializada');
-                    });
-        }
-    });
-    User.count().then(function (count) {
-        if (count === 0) {
-            User.create({username: 'admin', password: '1234'});
-            User.create({username: 'pepe', password: '5678'})
-                    .then(function () {
-                        console.log('Base de datos (usuarios) inicializada');
-                    });
-        }
-    });
+// sequelize.sync() inicializa tabla de preguntas en DB
+
+sequelize.sync().then(function() {
+	Quiz.count().then(function (count) {
+		if(count === 0) {
+			Quiz.create({pregunta: 'Capital de Italia', respuesta: 'Roma'});
+			Quiz.create({pregunta: 'Capital de Portugal', respuesta: 'Lisboa'})
+			.then(function(){console.log('Base de datos (quiz) inicializada');});
+		}
+	});
+	User.count().then(function (count) {
+		if(count === 0) {
+			User.create({username: 'admin',password: '1234', isAdmin: true});
+      User.create({username: 'pepe',password: '5678'})
+			.then(function(){console.log('Base de datos (usuarios) inicializada');});
+		}
+	});
+
 });

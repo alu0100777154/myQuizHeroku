@@ -9,7 +9,14 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       validate: { notEmpty: {msg: "-> Falta password."}}
+    },
+
+
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   });
-    return User;
-};
+
+  return User;
+}
