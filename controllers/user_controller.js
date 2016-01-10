@@ -30,6 +30,7 @@ exports.autenticar = function(login, password, callback) {
     }).catch(function(error){callback(error)});
 };
 
+
 exports.load = function(req, res, next, userId) {
   models.User.find({
             where: {
@@ -43,11 +44,6 @@ exports.load = function(req, res, next, userId) {
     }
   ).catch(function(error){next(error)});
 };
-
-
-
-
-
 
 // GET /user/:id/edit
 exports.edit = function(req, res) {

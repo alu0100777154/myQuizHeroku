@@ -1,4 +1,4 @@
-var models = require('../models/models.js');
+var models = require('../models/models');
 
 // MW que permite acciones solamente si el quiz objeto pertenece al usuario logeado o si es cuenta admin
 exports.ownershipRequired = function(req, res, next){
@@ -26,16 +26,40 @@ exports.load = function(req, res, next, quizId) {
       ).catch( function(error) { next(error) });
 };
 
-//GET /quizes/new
 
-exports.new = function (req, res) {
-    var quiz = models.Quiz.build(// crea objeto quiz
-            {pregunta: 'Pregunta', respuesta: 'Respuesta'}
-    );
-    res.render('quizes/new', {quiz: quiz, errors: []});
+exports.show = function(req,res) {
+  res.render('quizes/show', {quiz: req.quiz, errors: []});
 };
 
-// POST /quizes/create
+exports.answer = function(req, res) {
+  var resultado = 'Incorrecto';
+  if (req.query.respuesta === req.quiz.respuesta) resultado = 'Correcto';
+  res.render('quizes/answer', { quiz: req.quiz, respuesta: resultado, errors: [] });
+};
+
+exports.index = function(req,res) {
+  models.Quiz.findAll().then(function(quizes){
+    res.render('quizes/index', {quizes: quizes, errors: []});
+  })
+};
+
+exports.perfil = function(req,res) {
+  var options = {};
+  if(req.user){
+    options.where = {UserId: req.user.id}
+  }
+  models.Quiz.findAll(options).then(function(quizes){
+    res.render('quizes/index', {quizes: quizes, errors: []});
+  })
+};
+
+exports.new = function(req,res){
+  var quiz = models.Quiz.build(
+    {pregunta: 'Pregunta', respuesta: 'Respuesta'}
+  );
+  res.render('quizes/new', {quiz: quiz, errors: []});
+ };
+
 
  exports.create = function(req, res) {
    req.body.quiz.UserId = req.session.user.id;
@@ -53,61 +77,27 @@ exports.new = function (req, res) {
    ).catch(function(error){next(error)});
  };
 
-exports.edit = function(req, res) {
+
+ exports.edit = function(req, res) {
   var quiz = req.quiz;
   res.render('quizes/edit', { quiz: quiz, errors: [] });
 };
+
 
 exports.update =function(req,res){
   req.quiz.pregunta = req.body.quiz.pregunta;
   req.quiz.respuesta = req.body.quiz.respuesta;
 
-  req.quiz
-          .validate()
-          .then(
-          function(err){
+  req.quiz.validate().then(function(err){
       if(err){
         res.render('quizes/edit', {quiz: req.quiz, errors: err.errors});
       } else {
-          req.quiz
-                  .save({fields: ['pregunta', 'respuesta']})
-                  .then(function(){res.redirect('/quizes')});
+          req.quiz.save({fields: ['pregunta', 'respuesta']}).then(function(){res.redirect('/quizes')});
       }
     });
 };
 
-// GET /quizes
 
-exports.index = function (req, res) {
-    models.Quiz.findAll().then(function (quizes) {
-        res.render('quizes/index', {quizes: quizes, errors: []});
-    });
-};
-
-exports.perfil = function(req,res) {
-  var options = {};
-  if(req.user){
-    options.where = {UserId: req.user.id}
-  }
-  models.Quiz.findAll(options).then(function(quizes){
-    res.render('quizes/index', {quizes: quizes, errors: []});
-  })
-};
-
-// GET /quizes/question
-exports.show = function (req, res) {
-    res.render('quizes/show', {quiz: req.quiz, errors: []});
-};
-
-// GET /quizes/:id
-exports.answer = function (req, res) {
-    var resultado = 'Incorrecto';
-    if (req.query.respuesta === req.quiz.respuesta)
-        resultado = 'Correcto';
-    res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: []});
-};
-
-//DELETE /quizes/:id
 exports.destroy =function(req,res){
   req.quiz.destroy().then( function(){
     res.redirect('/quizes');
